@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBIuwkPb8ZLyZK9Ae242bA5RVNzae4aQ94",
-  authDomain: "zap-shift-6bbec.firebaseapp.com",
-  projectId: "zap-shift-6bbec",
-  storageBucket: "zap-shift-6bbec.firebasestorage.app",
-  messagingSenderId: "562989417540",
-  appId: "1:562989417540:web:86153fb5b086c414c86811",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase
