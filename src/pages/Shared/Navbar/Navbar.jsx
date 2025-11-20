@@ -1,8 +1,12 @@
 import React from 'react';
 import Logo from '../../../components/Logo/Logo';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
+import { FaArrowCircleRight } from 'react-icons/fa';
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
 
     const linkClass = ({ isActive }) =>
         isActive
@@ -15,8 +19,27 @@ const Navbar = () => {
         <li><NavLink to="/coverage" className={linkClass}>Coverage</NavLink></li>
         <li><NavLink to="/about" className={linkClass}>About Us</NavLink></li>
         <li><NavLink to="/pricing" className={linkClass}>Pricing</NavLink></li>
-        <li><NavLink to="/rider" className={linkClass}>Be a Rider</NavLink></li>
     </>
+
+    const handelLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Logged Out",
+                    text: "You have successfully logged out!",
+                    timer: 1800,
+                    showConfirmButton: false,
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Logout Failed",
+                    text: error.message || "Something went wrong!",
+                });
+            });
+    }
 
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -53,7 +76,21 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end">
-                <button className="btn btn-primary">Get Started</button>
+                {
+                    user ?
+                        <button
+                            onClick={handelLogOut}
+                            className="btn btn-primary text-black">Log Out</button>
+                        :
+                        <Link to={"/login"} className="btn btn-primary text-black">Log In</Link>
+
+                }
+                <Link
+                    to="/rider"
+                    className="btn bg-primary flex items-center ml-1.5">
+                    <span>Be a rider</span>
+                    <FaArrowCircleRight />
+                </Link>
             </div>
         </div>
     );

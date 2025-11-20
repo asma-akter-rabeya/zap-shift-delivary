@@ -5,7 +5,7 @@ import { Outlet } from 'react-router';
 
 const AuthLayout = () => {
     return (
-        <div className="w-11/12 mx-auto">
+        <div className="w-11/12 mx-auto my-6">
             <Logo />
 
             <div className="flex flex-col md:flex-row items-center justify-center mt-10">
@@ -13,6 +13,7 @@ const AuthLayout = () => {
                 {/* Form Area */}
                 <div className="w-full md:w-1/2 flex justify-center">
                     <Outlet />
+                    
                 </div>
 
                 {/* Image Area */}
