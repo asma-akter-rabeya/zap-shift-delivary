@@ -47,6 +47,7 @@ const SendParcel = () => {
             }
         }
         console.log('cost :', cost)
+        data.cost = cost; // setting the cost at db
         Swal.fire({
             title: "Agree with the Cost?",
             text: `You will be charged ${cost} taka!`,
@@ -192,7 +193,7 @@ const SendParcel = () => {
                         <fieldset>
                             <label className="font-semibold">Sender Email</label>
                             <input type='email'
-                                defaultValue={user?.email} readOnly
+                                defaultValue={user?.email} 
                                 {...register("senderEmail")}
                                 placeholder="Add Sender email "
                                 className={inputClasses}
