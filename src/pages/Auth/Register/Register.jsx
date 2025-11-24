@@ -4,6 +4,7 @@ import useAuth from '../../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import axios from 'axios';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Register = () => {
     const { register,
@@ -14,6 +15,7 @@ const Register = () => {
     const { registerUser, updateUserProfile } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
     const handleRegistration = (data) => {
 
@@ -23,6 +25,7 @@ const Register = () => {
         registerUser(data.email, data.password)
             .then(result => {
                 console.log(result.user);
+
 
                 // 1. store the image in form data
                 const formData = new FormData();
@@ -34,6 +37,20 @@ const Register = () => {
                 axios.post(image_API_URL, formData)
                     .then(res => {
                         console.log('after image upload', res.data.data.url)
+                        // create the user in the database:
+                        const userInfo = {
+                            email: data.email,
+                            displayName: data.name,
+                            photoURL: res.data.data.url
+
+                        }
+                        axiosSecure.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user created in the database');
+                                }
+                            })
+
 
                         // update user profile to firebase
                         const userProfile = {
@@ -141,9 +158,9 @@ const Register = () => {
 
                     <p className="text-center text-sm mt-2">
                         Already have an account?
-                        <Link to={'/login'} 
-                        state={location.state}
-                        className="text-blue-500 underline ml-1">Login</Link>
+                        <Link to={'/login'}
+                            state={location.state}
+                            className="text-blue-500 underline ml-1">Login</Link>
                     </p>
                 </form>
                 <SocialLogin></SocialLogin>

@@ -29,7 +29,9 @@ export const router = createBrowserRouter([
         path: 'rider',
         element: <PrivateRoute>
           <Rider></Rider>
-        </PrivateRoute>
+        </PrivateRoute>,
+        loader: () => fetch('/serviceCenter.json').then(res => res.json())
+
       },
       {
         path: 'sendParcel',
@@ -44,6 +46,7 @@ export const router = createBrowserRouter([
       }
     ]
   },
+  // auth
   {
     path: '/',
     Component: AuthLayout,
@@ -58,6 +61,7 @@ export const router = createBrowserRouter([
       },
     ]
   },
+// dashboard
   {
     path: 'dashboard',
     element: <PrivateRoute> <DashboardLayout></DashboardLayout> </PrivateRoute>,
@@ -75,11 +79,11 @@ export const router = createBrowserRouter([
         Component: PaymentHistory,
       },
       {
-        path:'payment-success',
+        path: 'payment-success',
         Component: PaymentSuccess,
       },
       {
-        path: 'payment-cancelled', 
+        path: 'payment-cancelled',
         Component: PaymentCancelled,
       }
     ]
