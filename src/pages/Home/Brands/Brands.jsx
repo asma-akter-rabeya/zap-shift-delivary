@@ -15,7 +15,7 @@ const brandLogos = [amazon, amazon_vector, casio, moonstar, randstad, star, star
 const Brands = () => {
     return (
         <Swiper
-            loop={true}
+            // loop={true}
             slidesPerView={4}
             centeredSlides={true}
             spaceBetween={30}

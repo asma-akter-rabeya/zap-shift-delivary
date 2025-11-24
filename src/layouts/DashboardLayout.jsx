@@ -1,5 +1,6 @@
 import React from 'react';
 import { CiDeliveryTruck } from 'react-icons/ci';
+import { FaRegCreditCard } from 'react-icons/fa';
 import { GoSidebarCollapse } from 'react-icons/go';
 import { IoHome } from 'react-icons/io5';
 import { LuSettings2 } from 'react-icons/lu';
@@ -42,6 +43,13 @@ const DashboardLayout = () => {
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyParcels" to="/dashboard/my-parcels">
                                 <CiDeliveryTruck size={24} />
                                 <span className="is-drawer-close:hidden">My Parcels</span>
+                            </NavLink>
+                        </li>
+                        {/* history */}
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History" to="/dashboard/payment-history">
+                                <FaRegCreditCard size={24} />
+                                <span className="is-drawer-close:hidden">Payment History</span>
                             </NavLink>
                         </li>
 
